@@ -1,0 +1,63 @@
+name: Publish
+
+on: [workflow_dispatch]
+#on: { push: { branches: [main] } }
+
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+jobs:
+  buildAndTestForSomePlatforms:
+    name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        unityVersion:
+          - 2020.1.0f1
+        targetPlatform:
+          - StandaloneOSX
+          - StandaloneWindows64
+          - StandaloneLinux64
+          - WebGL
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      - uses: actions/cache@v1.1.0
+        with:
+          path: ${{ matrix.projectPath }}/Library
+          key: Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}
+          restore-keys: |
+            Library-${{ matrix.projectPath }}-
+            Library-
+
+      - uses: webbertakken/unity-builder@v0.10
+        with:
+          unityVersion: ${{ matrix.unityVersion }}
+          targetPlatform: ${{ matrix.targetPlatform }}
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: ${{ matrix.targetPlatform }}
+          path: build
+
+      - name: Convert Unity target platform into itch.io channel
+        run: |
+          CHANNEL=${TARGET_PLATFORM/Standalone/}
+          CHANNEL=${CHANNEL/64/}
+          CHANNEL=${CHANNEL,,}
+          echo "From target platform [${TARGET_PLATFORM}] to channel [${CHANNEL}]"
+          echo "::set-env name=CHANNEL::$CHANNEL"
+        env:
+          TARGET_PLATFORM: ${{ matrix.targetPlatform }}
+
+      - uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: ${{ env.CHANNEL }}
+          ITCH_GAME: retro-brick-game
+          ITCH_USER: beercan
+          PACKAGE: build

@@ -34,7 +34,7 @@ jobs:
           path: Library
           key: Library-${{ matrix.targetPlatform }}
 
-      - uses: webbertakken/unity-builder@v1
+      - uses: webbertakken/unity-builder@v1.1
         with:
           unityVersion: ${{ matrix.unityVersion }}
           targetPlatform: ${{ matrix.targetPlatform }}

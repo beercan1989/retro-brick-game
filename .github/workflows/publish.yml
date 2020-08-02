@@ -37,7 +37,7 @@ jobs:
             Library-${{ matrix.projectPath }}-
             Library-
 
-      - uses: webbertakken/unity-builder@v0.10
+      - uses: webbertakken/unity-builder@v1.1
         with:
           unityVersion: ${{ matrix.unityVersion }}
           targetPlatform: ${{ matrix.targetPlatform }}
@@ -57,7 +57,7 @@ jobs:
         env:
           TARGET_PLATFORM: ${{ matrix.targetPlatform }}
 
-      - uses: josephbmanley/butler-publish-itchio-action@master
+      - uses: josephbmanley/butler-publish-itchio-action@v1.0.2
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: ${{ env.CHANNEL }}

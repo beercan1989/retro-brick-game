@@ -38,8 +38,9 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           targetPlatform: ${{ matrix.targetPlatform }}
 
-      - uses: actions/upload-artifact@v2
-        with:
-          if-no-files-found: error
-          name: ${{ matrix.targetPlatform }}-${{ matrix.unityVersion }}
-          path: build
+      # Useful for debugging GitHub Action problems
+      # - uses: actions/upload-artifact@v2
+      #   with:
+      #     if-no-files-found: error
+      #     name: ${{ matrix.targetPlatform }}-${{ matrix.unityVersion }}
+      #     path: build

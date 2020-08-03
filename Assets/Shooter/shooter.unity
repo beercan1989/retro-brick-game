@@ -321,20 +321,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7605451196594980076, guid: b29a10d15508ad64a941639049506308,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7605451196594980077, guid: b29a10d15508ad64a941639049506308,
         type: 3}
-      propertyPath: orthographic size
-      value: 0.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605451196594980077, guid: b29a10d15508ad64a941639049506308,
-        type: 3}
-      propertyPath: m_ForceIntoRT
-      value: 1
+      propertyPath: m_AllowDynamicResolution
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7605451196594980078, guid: b29a10d15508ad64a941639049506308,
         type: 3}

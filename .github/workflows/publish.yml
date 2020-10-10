@@ -10,7 +10,7 @@ env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 jobs:
-  buildAndTestForSomePlatforms:
+  buildForSomePlatforms:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
     runs-on: ubuntu-latest
     strategy:
@@ -29,22 +29,10 @@ jobs:
         with:
           lfs: true
 
-      - uses: actions/cache@v2
-        with:
-          path: Library
-          key: Library-${{ matrix.targetPlatform }}
-
-      - uses: webbertakken/unity-builder@v1.1
+      - uses: webbertakken/unity-builder@v1.4
         with:
           unityVersion: ${{ matrix.unityVersion }}
           targetPlatform: ${{ matrix.targetPlatform }}
-
-      # Useful for debugging GitHub Action problems
-      # - uses: actions/upload-artifact@v2
-      #   with:
-      #     if-no-files-found: error
-      #     name: ${{ matrix.targetPlatform }}-${{ matrix.unityVersion }}
-      #     path: build
 
       - name: Convert Unity target platform into itch.io channel
         run: |

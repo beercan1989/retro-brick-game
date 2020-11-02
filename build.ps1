@@ -24,7 +24,7 @@ Write-Output ""
 ##
 # https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy
 ##
-robocopy "$PSScriptRoot" "$PSScriptRoot/../retro-brick-game-clone" /mir /copy:DATSO /nfl /ndl /xd "Temp" "Build" "Logs" "obj"
+robocopy "$PSScriptRoot" "$PSScriptRoot/../retro-brick-game-clone" /mir /copy:DATSO /nfl /ndl /np /xd "Temp" "Build" "Logs" "obj"
 
 git status
 

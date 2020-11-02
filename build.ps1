@@ -28,6 +28,6 @@ robocopy "$PSScriptRoot" "$PSScriptRoot/../retro-brick-game-clone" /mir /copy:DA
 
 git status
 
-. "$PSScriptRoot/../retro-brick-game-clone/CI/test.ps1"
+. "$PSScriptRoot/../retro-brick-game-clone/CI/build.ps1"
 
 Pop-Location

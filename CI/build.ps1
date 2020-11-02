@@ -1,33 +1,7 @@
-
-$UNITY_VERSION = "2019.4.12f1"
-
-function UnityBuild($BuildTarget, $BuildName) {
-
-  Write-Host "Starting build for: $BuildTarget" -ForegroundColor Green
-
-  & "C:\Program Files\Unity\Hub\Editor\$UNITY_VERSION\Editor\Unity.exe" -batchmode -quit -nographics -buildName $BuildName -buildTarget $BuildTarget -executeMethod Editor.CI.Builder.Build | Write-Output
-
-  if ($? -eq $false) {
-    Write-Host "Failed $BuildName - $BuildTarget " -ForegroundColor Red 
-    exit 1
-  }
-
-  Write-Host "Finished build for: $BuildTarget" -ForegroundColor Green
-}
-
-function ItchIoPublish($BuildTarget, $Project, $Channel) {
-
-  Write-Host "Publishing ${BuildTarget} to ${Project}:${Channel}" -ForegroundColor Green
-  
-  butler push ./Build/${BuildTarget} ${Project}:${Channel}
-
-  if ($? -eq $false) {
-    Write-Host "Failed to publish ${BuildTarget} to ${Project}:${Channel} " -ForegroundColor Red
-    exit 1
-  }
-
-  Write-Host "Published ${BuildTarget} to ${Project}:${Channel}" -ForegroundColor Green
-}
+##
+# Import functions
+##
+. "$PSScriptRoot/functions.ps1"
 
 ##
 # Build

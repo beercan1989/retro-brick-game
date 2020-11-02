@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AssetsPPU: 100
-  m_RefResolutionX: 64
-  m_RefResolutionY: 64
+  m_RefResolutionX: 78
+  m_RefResolutionY: 148
   m_UpscaleRT: 1
   m_PixelSnapping: 0
   m_CropFrameX: 1
@@ -72,15 +72,15 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: 0.0031746032
+    y: 0.0016835016
+    width: 0.9904762
+    height: 0.996633
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 0.32
+  orthographic size: 0.74
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

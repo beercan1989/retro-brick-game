@@ -4,6 +4,9 @@
 
 Started out as a LOWREZJAM 2020 submission, a 64x64 low resolution game, but never got submitted.
 
+So the game development now continues as an attempt to build the whole thing closer to its 
+original dimensions.
+
 ## Game Details
 * One pixel equates to 0.01 in distance for a positional value
 * Blocks are 0.06 in size, so 6 pixels wide
@@ -15,6 +18,8 @@ Started out as a LOWREZJAM 2020 submission, a 64x64 low resolution game, but nev
       (blocks) + (spaces)
   (6 * blocks) + (blocks + 2)
   ```
+* But because I can't see how to do pixel perfect with even number of blocks
+  we're going to have 11x21 blocks making it an area of 78x148 pixels 
 
 ## Sources of information
 * https://github.com/beercan1989/playground-unity-2d

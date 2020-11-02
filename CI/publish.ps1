@@ -1,5 +1,12 @@
+##
+# Import functions
+##
+. "$PSScriptRoot/functions.ps1"
 
-butler push ./Build/StandaloneWindows64 beercan/retro-brick-game:windows
-butler push ./Build/StandaloneLinux64 beercan/retro-brick-game:linux
-butler push ./Build/StandaloneOSX beercan/retro-brick-game:osx
-butler push ./Build/WebGL beercan/retro-brick-game:webgl
+##
+# Publish
+##
+ItchIoPublish -BuildTarget StandaloneWindows64 -Project beercan/retro-brick-game -Channel windows
+ItchIoPublish -BuildTarget StandaloneLinux64 -Project beercan/retro-brick-game -Channel linux
+ItchIoPublish -BuildTarget StandaloneOSX -Project beercan/retro-brick-game -Channel osx
+ItchIoPublish -BuildTarget WebGL -Project beercan/retro-brick-game -Channel webgl

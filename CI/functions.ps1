@@ -5,7 +5,7 @@ function UnityBuild($BuildTarget, $BuildName, $UNITY_VERSION = "2019.4.12f1") {
 
   Write-Host "Starting build for: $BuildTarget" -ForegroundColor Green
 
-  & "C:\Program Files\Unity\Hub\Editor\$UNITY_VERSION\Editor\Unity.exe" -batchmode -quit -nographics -buildName $BuildName -buildTarget $BuildTarget -executeMethod Editor.CI.Builder.Build | Write-Output
+  & "C:\Program Files\Unity\Hub\Editor\$UNITY_VERSION\Editor\Unity.exe" -batchmode -quit -nographics -projectPath "$PWD" -buildName "$BuildName" -buildTarget "$BuildTarget" -executeMethod Editor.CI.Builder.Build | Write-Output
 
   if ($? -eq $false) {
     Write-Host "Failed $BuildName - $BuildTarget " -ForegroundColor Red

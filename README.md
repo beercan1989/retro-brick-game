@@ -21,6 +21,12 @@ original dimensions.
 * But because I can't see how to do pixel perfect with even number of blocks
   we're going to have 11x21 blocks making it an area of 78x148 pixels 
 
+## Scripts
+* `./test.ps1` will create a cloned project and run `./CI/test.ps1`
+* `./CI/test.ps1` attempts to create builds for each supported platforms
+* `./CI/publish.ps1` publishes the current builds to Itch.io
+* `./CI/build.ps1` creates fresh builds and publishes them.
+
 ## Sources of information
 * https://github.com/beercan1989/playground-unity-2d
 * https://seansleblanc.itch.io/better-minimal-webgl-template

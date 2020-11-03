@@ -2025,32 +2025,22 @@ PrefabInstance:
     - target: {fileID: 7605451196594980077, guid: b29a10d15508ad64a941639049506308,
         type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0
+      value: 0.24919614
       objectReference: {fileID: 0}
     - target: {fileID: 7605451196594980077, guid: b29a10d15508ad64a941639049506308,
         type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0
+      value: 0.04454685
       objectReference: {fileID: 0}
     - target: {fileID: 7605451196594980077, guid: b29a10d15508ad64a941639049506308,
         type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 1
+      value: 0.5016077
       objectReference: {fileID: 0}
     - target: {fileID: 7605451196594980077, guid: b29a10d15508ad64a941639049506308,
         type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605451196594980077, guid: b29a10d15508ad64a941639049506308,
-        type: 3}
-      propertyPath: orthographic size
-      value: 0.74
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605451196594980077, guid: b29a10d15508ad64a941639049506308,
-        type: 3}
-      propertyPath: m_ForceIntoRT
-      value: 0
+      value: 0.9093702
       objectReference: {fileID: 0}
     - target: {fileID: 7605451196594980078, guid: b29a10d15508ad64a941639049506308,
         type: 3}

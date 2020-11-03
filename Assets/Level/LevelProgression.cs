@@ -42,18 +42,23 @@ namespace Level
         
         private void Awake()
         {
+            // Lets find the left wall
             var leftWall = transform.Find("left");
+            
+            // How many bricks are in the wall?
             var numberOfBricks = leftWall.GetComponentsInChildren<Brick>().Length;
 
             // (pixels for each brick) + (spaces between bricks + start and end spaces)
             _levelLength = PixelsPerBrick * numberOfBricks + numberOfBricks + 2;
 
+            // Camera so we can work out the visible size to calculate the end position of the level.
             _camera = FindObjectOfType<PixelPerfectCamera>();
 
+            // TODO - Remove debug logger
             OnLevelEvent += LogEvent;
         }
 
-        // TODO - Remove this debug stuff
+        // TODO - Remove debug logger
         private static void LogEvent(object sender, LevelEvent e)
         {
             Debug.LogFormat("LevelEvent: {0}", e);
@@ -61,6 +66,7 @@ namespace Level
 
         private void Start()
         {
+            // Report that the level has started.
             OnLevelEvent?.Invoke(this, LevelEvent.Started);
         }
 
@@ -69,16 +75,20 @@ namespace Level
             // Increase the level progress based on time and pixel conversion.
             _levelProgress += Time.deltaTime * PixelsPerSecond;
             
-            // _levelLength - (2 bricks) - (camera view size / 2)
-            var levelEnd = _levelLength - ((2f * PixelsPerBrick) + (_camera.refResolutionY / 2f));
+            // _levelLength - (2 bricks + 2 spaces + camera view size / 2)
+            var levelEnd = _levelLength - (2f * PixelsPerBrick + 2 + _camera.refResolutionY / 2f);
             
             // Have we completed level progression?
             if (_levelProgress >= levelEnd)
             {
+                // Report that the level has finished.
                 OnLevelEvent?.Invoke(this, LevelEvent.Finished);
                 
                 // Level progress stops.
                 enabled = false;
+                
+                // Lets just make sure we're not off by a single pixel.
+                transform.position = new Vector3(0, -levelEnd * PixelSize, 0);
             }
             else
             {

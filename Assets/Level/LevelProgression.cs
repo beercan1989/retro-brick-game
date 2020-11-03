@@ -1,6 +1,7 @@
 ﻿using System;
 using Bricks;
 using UnityEngine;
+using UnityEngine.U2D;
 
 namespace Level
 {
@@ -27,21 +28,27 @@ namespace Level
         /// <summary>
         /// The number of pixels that make up the level.
         /// </summary>
-        private float _levelLength;
+        private int _levelLength;
 
         /// <summary>
         /// The number of pixels displayed so far.
         /// </summary>
         private float _levelProgress;
 
+        /// <summary>
+        /// Current pixel perfect camera.
+        /// </summary>
+        private PixelPerfectCamera _camera;
+        
         private void Awake()
         {
             var leftWall = transform.Find("left");
-
             var numberOfBricks = leftWall.GetComponentsInChildren<Brick>().Length;
 
             // (pixels for each brick) + (spaces between bricks + start and end spaces)
             _levelLength = PixelsPerBrick * numberOfBricks + numberOfBricks + 2;
+
+            _camera = FindObjectOfType<PixelPerfectCamera>();
 
             OnLevelEvent += LogEvent;
         }
@@ -62,8 +69,11 @@ namespace Level
             // Increase the level progress based on time and pixel conversion.
             _levelProgress += Time.deltaTime * PixelsPerSecond;
             
+            // _levelLength - (2 bricks) - (camera view size / 2)
+            var levelEnd = _levelLength - ((2f * PixelsPerBrick) + (_camera.refResolutionY / 2f));
+            
             // Have we completed level progression?
-            if (_levelProgress >= _levelLength)
+            if (_levelProgress >= levelEnd)
             {
                 OnLevelEvent?.Invoke(this, LevelEvent.Finished);
                 
@@ -73,7 +83,7 @@ namespace Level
             else
             {
                 // We only want whole pixels.
-                var levelProgress = (int) _levelProgress;
+                var levelProgress = (int) Math.Round(_levelProgress);
 
                 // Lets move the level based on the progress we've made.
                 transform.position = new Vector3(0, -levelProgress * PixelSize, 0);

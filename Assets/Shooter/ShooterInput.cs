@@ -20,7 +20,7 @@ namespace Shooter
             _player = GameObject.Find("player").transform;
         }
 
-        public void OnInputMovement(InputAction.CallbackContext ctx)
+        public void OnMovement(InputAction.CallbackContext ctx)
         {
             var movement = ctx.ReadValue<Vector2>();
             if (movement.x > 0)

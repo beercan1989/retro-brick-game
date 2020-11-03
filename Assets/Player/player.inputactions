@@ -156,61 +156,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "Swipe [Touchscreen]",
-                    "id": "a1d3525e-2793-40fb-b74d-36a550bc4161",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "d9355f1f-2ef8-4f0f-95cc-4b891493f363",
-                    "path": "<Touchscreen>/primaryTouch/delta/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Touch",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "6593cb6a-23a3-4dae-bb02-a34420f745ca",
-                    "path": "<Touchscreen>/primaryTouch/delta/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Touch",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "80f2a3e3-d049-44f9-86c2-2c1693025644",
-                    "path": "<Touchscreen>/primaryTouch/delta/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Touch",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "933a5f06-3492-4eaa-af6a-28bdb3297f3f",
-                    "path": "<Touchscreen>/primaryTouch/delta/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Touch",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
                     "id": "143bb1cd-cc10-4eca-a2f0-a3664166fe91",
                     "path": "<Gamepad>/rightTrigger",

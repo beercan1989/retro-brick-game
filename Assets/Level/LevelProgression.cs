@@ -11,12 +11,12 @@ namespace Level
         public static event EventHandler<LevelEvent> OnLevelEvent;
 
         /// <summary>
-        /// Distance taken up by one pixel within the game;
+        /// Distance taken up by one pixel within the game.
         /// </summary>
         private const float PixelSize = 0.01f;
 
         /// <summary>
-        /// Number of pixels taken up by each block
+        /// Number of pixels taken up by each block.
         /// </summary>
         private const int PixelsPerBrick = 6;
 

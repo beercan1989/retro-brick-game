@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Shooter
@@ -19,7 +20,6 @@ namespace Shooter
         {
             _player = GameObject.Find("player").transform;
         }
-
         public void OnMovement(InputAction.CallbackContext ctx)
         {
             var movement = ctx.ReadValue<Vector2>();
@@ -31,6 +31,10 @@ namespace Shooter
             {
                 _player.position += Vector3.left * PixelSize;
             }
+        }
+        
+        public void OnShoot(InputAction.CallbackContext ctx)
+        {
         }
     }
 }

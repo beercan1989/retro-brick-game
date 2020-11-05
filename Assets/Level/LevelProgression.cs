@@ -60,6 +60,7 @@ namespace Level
             _levelProgress += Time.deltaTime * PixelsPerSecond;
             
             // _levelLength - (2 bricks + 2 spaces + camera view size / 2)
+            // TODO - Stop regenerating every update
             var levelEnd = _levelLength - (2f * PixelsPerBrick + 2 + _camera.refResolutionY / 2f);
             
             // Have we completed level progression?

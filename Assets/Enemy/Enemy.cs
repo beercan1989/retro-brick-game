@@ -139,6 +139,8 @@ namespace Enemy
             // TODO - Work out how to position left to right.
             // TODO - Work out how we take into consideration the affect of rotation on suitable positions.
             
+            // TODO - Consider ColliderComposite2D bounds
+            
             // For now lets just set it in the centre at the top.
             transform.position = new Vector3(0f, StartingPosition, 0f);
             

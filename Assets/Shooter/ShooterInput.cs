@@ -1,4 +1,5 @@
 ﻿using Level;
+using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static PixelConstants;
@@ -11,11 +12,11 @@ namespace Shooter
         /// <summary>
         /// The player object.
         /// </summary>
-        private Transform _player;
+        private PlayerBehaviour _player;
 
         private void Awake()
         {
-            _player = GameObject.Find("player").transform;
+            _player = FindObjectOfType<PlayerBehaviour>();
             
             LevelProgression.OnLevelEvent += HandleLevelEvents;
         }
@@ -35,11 +36,11 @@ namespace Shooter
             var movement = ctx.ReadValue<Vector2>();
             if (movement.x > 0)
             {
-                _player.position += Vector3.right * PixelSize;
+                _player.transform.position += Vector3.right * PixelSize;
             }
             else if (movement.x < 0)
             {
-                _player.position += Vector3.left * PixelSize;
+                _player.transform.position += Vector3.left * PixelSize;
             }
         }
         

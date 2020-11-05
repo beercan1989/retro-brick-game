@@ -8,7 +8,7 @@ using static PixelConstants;
 namespace Enemy
 {
     // TODO - Reconsider the naming/moving when we introduce other types of enemies.
-    public class Enemy : MonoBehaviour
+    public class EnemyBehaviour : MonoBehaviour
     {
         /// <summary>
         /// All the child models this enemy can appear as.

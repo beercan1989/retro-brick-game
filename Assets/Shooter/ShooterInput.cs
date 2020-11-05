@@ -1,15 +1,12 @@
-﻿using System;
+﻿using Level;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static PixelConstants;
 
 namespace Shooter
 {
     public class ShooterInput : MonoBehaviour
     {
-        /// <summary>
-        /// Distance taken up by one pixel within the game.
-        /// </summary>
-        private const float PixelSize = 0.01f;
         
         /// <summary>
         /// The player object.
@@ -19,7 +16,18 @@ namespace Shooter
         private void Awake()
         {
             _player = GameObject.Find("player").transform;
+            
+            LevelProgression.OnLevelEvent += HandleLevelEvents;
         }
+
+        private void HandleLevelEvents(object sender, LevelEvent levelEvent)
+        {
+            if (levelEvent == LevelEvent.Finished)
+            {
+                enabled = false;
+            }
+        }
+
         public void OnMovement(InputAction.CallbackContext ctx)
         {
             var movement = ctx.ReadValue<Vector2>();

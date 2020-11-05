@@ -2,6 +2,7 @@
 using Bricks;
 using UnityEngine;
 using UnityEngine.U2D;
+using static PixelConstants;
 
 namespace Level
 {
@@ -9,21 +10,6 @@ namespace Level
     public class LevelProgression : MonoBehaviour
     {
         public static event EventHandler<LevelEvent> OnLevelEvent;
-
-        /// <summary>
-        /// Distance taken up by one pixel within the game.
-        /// </summary>
-        private const float PixelSize = 0.01f;
-
-        /// <summary>
-        /// Number of pixels taken up by each block.
-        /// </summary>
-        private const int PixelsPerBrick = 6;
-
-        /// <summary>
-        /// Number of pixels to progress the game by per second.
-        /// </summary>
-        private const int PixelsPerSecond = 50; // TODO - Work into level difficulty
 
         /// <summary>
         /// The number of pixels that make up the level.
@@ -54,11 +40,9 @@ namespace Level
             // Camera so we can work out the visible size to calculate the end position of the level.
             _camera = FindObjectOfType<PixelPerfectCamera>();
 
-            // TODO - Remove debug logger
             OnLevelEvent += LogEvent;
         }
 
-        // TODO - Remove debug logger
         private static void LogEvent(object sender, LevelEvent e)
         {
             Debug.LogFormat("LevelEvent: {0}", e);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Level;
+using Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using static PixelConstants;
@@ -8,6 +9,7 @@ using static PixelConstants;
 namespace Enemy
 {
     // TODO - Reconsider the naming/moving when we introduce other types of enemies.
+    [RequireComponent(typeof(Rigidbody2D))]
     public class EnemyBehaviour : MonoBehaviour
     {
         /// <summary>
@@ -42,7 +44,7 @@ namespace Enemy
         
         private void Awake()
         {
-            _models = GetComponentsInChildren<Rigidbody2D>(includeInactive: true)
+            _models = GetComponentsInChildren<Model>(includeInactive: true)
                 .Select(child => child.gameObject)
                 .ToArray();
 

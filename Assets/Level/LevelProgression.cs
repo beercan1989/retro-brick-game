@@ -12,19 +12,14 @@ namespace Level
         public static event EventHandler<LevelEvent> OnLevelEvent;
 
         /// <summary>
-        /// The number of pixels that make up the level.
-        /// </summary>
-        private int _levelLength;
-
-        /// <summary>
         /// The number of pixels displayed so far.
         /// </summary>
         private float _levelProgress;
 
         /// <summary>
-        /// Current pixel perfect camera.
+        /// The location of the level when we're at the end.
         /// </summary>
-        private PixelPerfectCamera _camera;
+        private float _levelEnd;
         
         private void Awake()
         {
@@ -34,11 +29,15 @@ namespace Level
             // How many bricks are in the wall?
             var numberOfBricks = leftWall.GetComponentsInChildren<Brick>().Length;
 
+            // How long is the whole level in pixels?
             // (pixels for each brick) + (spaces between bricks + start and end spaces)
-            _levelLength = PixelsPerBrick * numberOfBricks + numberOfBricks + 2;
-
+            var levelLength = PixelsPerBrick * numberOfBricks + numberOfBricks + 2;
+            
             // Camera so we can work out the visible size to calculate the end position of the level.
-            _camera = FindObjectOfType<PixelPerfectCamera>();
+            var pixelCamera = FindObjectOfType<PixelPerfectCamera>();
+            
+            // levelLength - (2 bricks + 2 spaces + camera view size / 2)
+            _levelEnd = levelLength - (2f * PixelsPerBrick + 2f + pixelCamera.refResolutionY / 2f);
 
             OnLevelEvent += LogEvent;
         }
@@ -59,21 +58,14 @@ namespace Level
             // Increase the level progress based on time and pixel conversion.
             _levelProgress += Time.deltaTime * PixelsPerSecond;
             
-            // _levelLength - (2 bricks + 2 spaces + camera view size / 2)
-            // TODO - Stop regenerating every update
-            var levelEnd = _levelLength - (2f * PixelsPerBrick + 2 + _camera.refResolutionY / 2f);
-            
             // Have we completed level progression?
-            if (_levelProgress >= levelEnd)
+            if (_levelProgress >= _levelEnd)
             {
-                // Report that the level has finished.
-                OnLevelEvent?.Invoke(this, LevelEvent.Finished);
-                
-                // Level progress stops.
-                enabled = false;
+                // We've reached the end, time to just end it.
+                EndLevel();
                 
                 // Lets just make sure we're not off by a single pixel.
-                transform.position = new Vector3(0, -levelEnd * PixelSize, 0);
+                transform.position = new Vector3(0, -_levelEnd * PixelSize, 0);
             }
             else
             {
@@ -83,6 +75,21 @@ namespace Level
                 // Lets move the level based on the progress we've made.
                 transform.position = new Vector3(0, -levelProgress * PixelSize, 0);
             }
+        }
+
+        /// <summary>
+        /// Just end the level where it currently stands.
+        /// </summary>
+        public void EndLevel()
+        {
+            // Can only end the level if enabled.
+            if (!enabled) return;
+            
+            // Report that the level has finished.
+            OnLevelEvent?.Invoke(this, LevelEvent.Finished);
+                
+            // Level progress stops.
+            enabled = false;
         }
     }
 }

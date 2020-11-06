@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Player
 {
     // TODO - Add sound
-    public class OnDeathAnimation : MonoBehaviour
+    public class Death : MonoBehaviour
     {
         /// <summary>
         /// Number of seconds each death scene is displayed for.

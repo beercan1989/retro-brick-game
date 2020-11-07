@@ -48,6 +48,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2409eeb8fa2844149c65e0048423e92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnBounds:
+  - rotation: 0
+    Lower: {x: -2, y: 0}
+    Upper: {x: 2, y: 2}
+  - rotation: 90
+    Lower: {x: -3, y: -1}
+    Upper: {x: 1, y: 1}
+  - rotation: 180
+    Lower: {x: -2, y: -2}
+    Upper: {x: 2, y: 0}
+  - rotation: 270
+    Lower: {x: -1, y: -1}
+    Upper: {x: 3, y: 1}
 --- !u!1001 &5647217556359637890
 PrefabInstance:
   m_ObjectHideFlags: 0

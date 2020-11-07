@@ -164,12 +164,6 @@ namespace Enemy
             var randomX = Random.Range(spawnBound.Lower.x, spawnBound.Upper.x) * PositionByBrick;
             var randomY = Random.Range(spawnBound.Lower.y, spawnBound.Upper.y) * PositionByBrick;
 
-            // Line
-            // 0  lower (-3, 0) upper (3, 0)
-            // 90 lower (-3, 0) upper (0, 0)
-            // 180 lower (-3, -3) upper (3, 0)
-            // 270 lower (0, 0) upper (3, 0)
-
             // Take the starting point and the move it into the random bounds.
             _startingPosition = transform.position = new Vector3(randomX, BasePositionY + randomY, 0);
             

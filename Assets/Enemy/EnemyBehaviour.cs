@@ -13,14 +13,24 @@ namespace Enemy
     public class EnemyBehaviour : MonoBehaviour
     {
         /// <summary>
+        /// The base position of the enemy in the Y.
+        /// </summary>
+        private const float BasePositionY = 0.7f;
+
+        /// <summary>
+        /// The grid position for a brick.
+        /// </summary>
+        private const float PositionByBrick = PixelsPerBrick * PixelSize + PixelSize;
+        
+        /// <summary>
         /// All the child models this enemy can appear as.
         /// </summary>
-        private GameObject[] _models;
+        private Model[] _models;
 
         /// <summary>
         /// Current model in use.
         /// </summary>
-        private GameObject _model;
+        private Model _model;
 
         /// <summary>
         /// Renderers of the current model in use.
@@ -33,20 +43,23 @@ namespace Enemy
         private bool _modelSeen;
 
         /// <summary>
-        /// The starting position of the enemy.
+        /// Current rotation of the enemy.
         /// </summary>
-        private const float StartingPosition = 0.7f;
-        
+        private SpawnRotation _spawnRotation;
+
         /// <summary>
         /// Tracks the amount of movement the enemy has made.
         /// </summary>
         private float _movement;
+
+        /// <summary>
+        /// The starting position of the enemy.
+        /// </summary>
+        private Vector3 _startingPosition;
         
         private void Awake()
         {
-            _models = GetComponentsInChildren<Model>(includeInactive: true)
-                .Select(child => child.gameObject)
-                .ToArray();
+            _models = GetComponentsInChildren<Model>(includeInactive: true);
 
             LevelProgression.OnLevelEvent += HandleLevelEvents;
         }
@@ -71,7 +84,7 @@ namespace Enemy
             var movement = (int) Math.Round(_movement);
 
             // Lets move the enemy based on the progress we've made.
-            transform.position = new Vector3(0f, StartingPosition - movement * PixelSize, 0f);
+            transform.position = _startingPosition - new Vector3(0f, movement * PixelSize, 0f);
         }
 
         private void HandleLevelEvents(object sender, LevelEvent levelEvent)
@@ -88,9 +101,9 @@ namespace Enemy
         private void Regenerate()
         {
             if (!PickModel()) return;
+            EnableModel();
             RotateModel();
             PositionModel();
-            EnableModel();
         }
 
         /// TODO - Look at better methods, breaks when visible in Scene view but Game view.
@@ -105,7 +118,7 @@ namespace Enemy
                 _modelSeen = true;
             } else if (_modelSeen) // Now we no longer see the model.
             {
-                _model.SetActive(false);
+                _model.gameObject.SetActive(false);
                 Regenerate();
             }
         }
@@ -116,9 +129,10 @@ namespace Enemy
         /// <returns>true if we have changed the model</returns>
         private bool PickModel()
         {
-            if (_model != null && _model.activeInHierarchy) return false;
+            if (_model != null && _model.gameObject.activeInHierarchy) return false;
             _model = _models[Random.Range(0, _models.Length)];
             _renderers = _model.GetComponentsInChildren<SpriteRenderer>();
+            _modelSeen = false;
             Debug.LogFormat("Enemy model picked: {0}", _model);
             return true;
         }
@@ -129,7 +143,11 @@ namespace Enemy
         private void RotateModel()
         {
             if (_model == null) return;
-            transform.Rotate(0f, 0f, 90f * Random.Range(0, 4));
+
+            var spawnRotations = Enum.GetValues(typeof(SpawnRotation)).OfType<SpawnRotation>().ToArray();
+            _spawnRotation = spawnRotations[Random.Range(0, spawnRotations.Length)];
+
+            transform.Rotate(0f, 0f, (int) _spawnRotation);
         }
         
         /// <summary>
@@ -138,13 +156,22 @@ namespace Enemy
         private void PositionModel()
         {
             if (_model == null) return;
-            // TODO - Work out how to position left to right.
-            // TODO - Work out how we take into consideration the affect of rotation on suitable positions.
+
+            // Find the spawn bounds for the current rotation.
+            var spawnBound = _model.SpawnBound(_spawnRotation);
             
-            // TODO - Consider ColliderComposite2D bounds
-            
-            // For now lets just set it in the centre at the top.
-            transform.position = new Vector3(0f, StartingPosition, 0f);
+            // Calculate the random x and y positions
+            var randomX = Random.Range(spawnBound.Lower.x, spawnBound.Upper.x) * PositionByBrick;
+            var randomY = Random.Range(spawnBound.Lower.y, spawnBound.Upper.y) * PositionByBrick;
+
+            // Line
+            // 0  lower (-3, 0) upper (3, 0)
+            // 90 lower (-3, 0) upper (0, 0)
+            // 180 lower (-3, -3) upper (3, 0)
+            // 270 lower (0, 0) upper (3, 0)
+
+            // Take the starting point and the move it into the random bounds.
+            _startingPosition = transform.position = new Vector3(randomX, BasePositionY + randomY, 0);
             
             // Reset movement
             _movement = 0;
@@ -156,7 +183,7 @@ namespace Enemy
         private void EnableModel()
         {
             if (_model == null) return;
-            _model.SetActive(true);
+            _model.gameObject.SetActive(true);
         }
     }
 }

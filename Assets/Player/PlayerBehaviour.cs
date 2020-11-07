@@ -7,6 +7,9 @@ namespace Player
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerBehaviour : MonoBehaviour
     {
+        /// <summary>
+        /// The rigidbody of the player.
+        /// </summary>
         private Rigidbody2D _rigidbody;
         
         /// <summary>

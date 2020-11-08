@@ -15,4 +15,10 @@
     /// Number of pixels to progress the game by per second.
     /// </summary>
     public const int PixelsPerSecond = 50;
+    
+    /// <summary>
+    /// The grid position for a brick.
+    /// </summary>
+    public const float PositionByBrick = PixelsPerBrick * PixelSize + PixelSize;
+
 }

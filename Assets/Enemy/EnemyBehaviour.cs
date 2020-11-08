@@ -17,11 +17,6 @@ namespace Enemy
         private const float BasePositionY = 0.7f; // PositionByBrick * 10?
 
         /// <summary>
-        /// The grid position for a brick.
-        /// </summary>
-        private const float PositionByBrick = PixelsPerBrick * PixelSize + PixelSize;
-        
-        /// <summary>
         /// All the child models this enemy can appear as.
         /// </summary>
         private Model[] _models;

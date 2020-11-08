@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Brick
   - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX

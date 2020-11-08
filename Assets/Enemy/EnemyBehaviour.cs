@@ -8,14 +8,13 @@ using static PixelConstants;
 
 namespace Enemy
 {
-    // TODO - Reconsider the naming/moving when we introduce other types of enemies.
     [RequireComponent(typeof(Rigidbody2D))]
     public class EnemyBehaviour : MonoBehaviour
     {
         /// <summary>
         /// The base position of the enemy in the Y.
         /// </summary>
-        private const float BasePositionY = 0.7f;
+        private const float BasePositionY = 0.7f; // PositionByBrick * 10?
 
         /// <summary>
         /// The grid position for a brick.
@@ -74,6 +73,20 @@ namespace Enemy
             HandleRegeneration();
             Move();
         }
+        
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            // If its not an enemy we don't care about it.
+            if (!other.collider.CompareTag("Bullet")) return;
+
+            // TODO - Update a score in the future.
+            
+            // Die and reincarnate
+            Regenerate();
+            
+            // Destroy the bullet
+            Destroy(other.gameObject);
+        }
 
         private void Move()
         {
@@ -100,13 +113,17 @@ namespace Enemy
         /// </summary>
         private void Regenerate()
         {
-            if (!PickModel()) return;
+            if (_model != null)
+            {
+                // Deactivate the old model.
+                _model.gameObject.SetActive(false);
+            }
+            PickModel();
             EnableModel();
             RotateModel();
             PositionModel();
         }
 
-        /// TODO - Look at better methods, breaks when visible in Scene view but Game view.
         /// <summary>
         /// Handle regeneration by checking to see if the model is still visible or not.
         /// </summary>
@@ -118,7 +135,6 @@ namespace Enemy
                 _modelSeen = true;
             } else if (_modelSeen) // Now we no longer see the model.
             {
-                _model.gameObject.SetActive(false);
                 Regenerate();
             }
         }
@@ -127,14 +143,11 @@ namespace Enemy
         /// Pick a new model for the enemy.
         /// </summary>
         /// <returns>true if we have changed the model</returns>
-        private bool PickModel()
+        private void PickModel()
         {
-            if (_model != null && _model.gameObject.activeInHierarchy) return false;
             _model = _models[Random.Range(0, _models.Length)];
             _renderers = _model.GetComponentsInChildren<SpriteRenderer>();
             _modelSeen = false;
-            Debug.LogFormat("Enemy model picked: {0}", _model);
-            return true;
         }
 
         /// <summary>

@@ -7,6 +7,8 @@ Started out as a LOWREZJAM 2020 submission, a 64x64 low resolution game, but nev
 So the game development now continues as an attempt to build the whole thing closer to its 
 original dimensions.
 
+A compiled and playable versions of this game for web, android, windows, linux and even osx; can be found here https://beercan.itch.io/retro-brick-game on my Itch page.
+
 ## Concept Art
 Example "enemies", be it shooting targets or shapes to land.  
 ![Enemies](Art/enemies.png?raw=true "Enemies")

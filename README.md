@@ -7,6 +7,26 @@ Started out as a LOWREZJAM 2020 submission, a 64x64 low resolution game, but nev
 So the game development now continues as an attempt to build the whole thing closer to its 
 original dimensions.
 
+## Concept Art
+Example "enemies", be it shooting targets or shapes to land.  
+![Enemies](Art/enemies.png?raw=true "Enemies")
+
+Idea's for how the shooter game section would look  
+![Shooter 1](Art/shooter-1.png?raw=true "Shooter 1")
+![Shooter 2](Art/shooter-2.png?raw=true "Shooter 2")
+![Shooter 3](Art/shooter-3.png?raw=true "Shooter 3")
+![Shooter 4](Art/shooter-4.png?raw=true "Shooter 4")
+
+What happens on death, small version  
+![Death 1](Art/death-1.png?raw=true "Death 1")
+![Death 2](Art/death-2.png?raw=true "Death 2")
+![Death 3](Art/death-3.png?raw=true "Death 3")
+
+What happens on death, medium version  
+![Death Step 1](Art/death-step-1.png?raw=true "Death Step 1")
+![Death Step 2](Art/death-step-2.png?raw=true "Death Step 2")
+![Death Step 3](Art/death-step-3.png?raw=true "Death Step 3")
+
 ## Game Details
 * One pixel equates to 0.01 in distance for a positional value
 * Blocks are 0.06 in size, so 6 pixels wide
